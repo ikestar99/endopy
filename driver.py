@@ -10,4 +10,4 @@ Created on Fri May 14 03:13:56 2021
 import endopy.main as em
 
 
-em.userInput()
+# em.userInput()
