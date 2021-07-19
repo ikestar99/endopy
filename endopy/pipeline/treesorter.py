@@ -39,7 +39,7 @@ class TreeSorter(BasePipeline):
                 for idx, lifImage in enumerate(lifFileReader.get_iter_image()):
                     pbar.set_description(str(idx), refresh=True)
                     row = cls.getRow(lifFile, (idx + 1))
-                    if row is None or op.isdir(row("sample")):
+                    if row is None:
                         pbar.update(1)
                         continue
 
