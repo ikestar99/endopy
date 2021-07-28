@@ -337,7 +337,7 @@ class BasePipeline(object):
     @classmethod
     def save(cls, dfs):
         sorPath = getPath(cls.cfg["DataDir"], cls.sCSV, ext="csv")
-        BasePipeline.dfs = dfs
+        BasePipeline.dfs = dfs.replace({"": None, "None": None})
         cls.dfs.to_csv(sorPath, encoding="utf-8", index=False)
 
     @classmethod
@@ -394,7 +394,8 @@ class BasePipeline(object):
         if (csvPath is not None) and (sorPath is not None):
             cls.dfs = pd.read_csv(
                 sorPath, sep=r'\s*,\s*', header=0, encoding='ascii',
-                engine='python', skipinitialspace=True)
+                engine='python', skipinitialspace=True).replace(
+                    {"": None, "None": None})
 
         elif csvPath is not None:
             dfs = pd.read_csv(
@@ -428,7 +429,7 @@ class BasePipeline(object):
                 changeExt(getPathName(s)) if s is not None else
                 "-".join((changeExt(getPathName(l)), str(i))) for s, l, i in
                 zip(dfs[cls.lHead3[3]], dfs[cls.lHead1[0]], dfs[cls.lHead1[1]])]
-            dfs = dfs.replace({"": None})
+            dfs = dfs.replace({"": None, "None": None})
             dfs = dfs.drop_duplicates(
                 subset=cls.lHead1, keep="first", ignore_index=True)
             cls.dfs = dfs.drop_duplicates(
