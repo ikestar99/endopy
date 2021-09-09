@@ -124,7 +124,7 @@ class BasePipeline(object):
 
                 elif mode == "channels":
                     value = [self("c0"), self("c1")]
-                    value = [c for c in value if c is not None]
+                    value = [c for c in value if ((type(c) == str) and (len(c) > 0))]
                 elif mode == "subDirs":
                     value = [getPath(self[3, 0], s) for s in self.subDir]
                 elif mode == "mskDirs":
