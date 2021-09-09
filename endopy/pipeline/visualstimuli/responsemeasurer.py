@@ -43,6 +43,7 @@ class ResponseMeasurer(BasePipeline):
     def measureAndPlotRawResponses(cls):
         for row in tqdm(cls.iterRows(), total=cls.len()):
             dfm = None
+            print(row("channels"))
             for c in row("channels"):
                 rawFile = row("rawFile", c)
                 if op.isfile(rawFile) and op.isfile(row("mesFile")):
